@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" ng-app=
+"">
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -18,9 +19,25 @@
 </script>
 </head>
 
-<body>
-  <h1>Associate Degree Nursing</h1>
+<body ng-controller="TextController">
+  <div class="container">
+    <h1>Associate Degree Nursing</h1>
 
-  <h2>Rating Scale for Foundations</h2>New Admissions
+    <h2>Rating Scale for Foundations</h2>
+
+    <h2>New Admissions</h2>
+
+    <p>{{messages.someText}}</p>
+  </div><script type="text/javascript">
+//<![CDATA[
+  /* angular controller */
+  var messages = {};
+messages.someText = 'You have started your journey!!!';
+
+  function TextController($scope) {
+    $scope.messages = messages;
+  }
+  //]]>
+  </script>
 </body>
 </html>
