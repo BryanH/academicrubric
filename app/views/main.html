@@ -1,23 +1,57 @@
 <div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+    <h2>Rating Scale for Foundations</h2>
+	<h2>New Admissions</h2>
+
+			<form class="form-horizontal" ng-controller="RatingController">
+	<div class="row">
+					<div class="form-group">
+							<label for="first_name">First Name</label>
+							<input type="text" id="first_name" placeholder="First Name" class="form-control" />
+					</div>
+					<div class="form-group">
+							<label for="last_name">Last Name</label>
+							<input type="text" id="last_name" placeholder="Last Name" class="form-control" />
+					</div>
+					<div class="form-group">
+							<label for="studentid">Student ID</label>
+							<input type="text" id="studentid" placeholder="Student ID" class="form-control" />
+					</div>
+			</div>
+			<div class="row">
+					<h3>Prerequisites</h3>
+			</div>
+			<div class="row">
+					<table class="table table-striped table-bordered">
+							<tr>
+									<th>Course</th>
+									<th colspan="4">Grade</th>
+									<th>Points</th>
+							</tr>
+							<tr ng-repeat="class in classes">
+									<td>{{class.name}}</td>
+									<td><input type="radio" name="{{class.name}}" value="4" id="{{class.name}}4" ng-model="class.value" ng-change="computeAcademic(class.value)" /><label for="{{class.name}}4">&nbsp;A</label></td>
+									<td><input type="radio" name="{{class.name}}" value="3" id="{{class.name}}3" ng-model="class.value" ng-change="computeAcademic(class.value)" /><label for="{{class.name}}3">&nbsp;B</label></td>
+									<td><input type="radio" name="{{class.name}}" value="2" id="{{class.name}}2" ng-model="class.value" ng-change="computeAcademic(class.value)" /><label for="{{class.name}}2">&nbsp;C/CLEP</label></td>
+									<td><input type="radio" name="{{class.name}}" value="0" id="{{class.name}}0" ng-model="class.value" ng-change="computeAcademic(class.value)" /><label for="{{class.name}}0">&nbsp;N/A</label></td>
+									<td ng-if="class.has_points == true">{{class.value}}</td>
+									<td ng-if="class.has_points == false">&ndash;</td>
+							</tr>
+
+					</table>
+					<p class='pull-right'>
+					Total Academic Points: {{academicTotal}}</p>
+			</div>
+			<div class="row">
+				<input type="checkbox" name="bachelors" id="bachelors" ng-model="bachelors.value" ng-change="computeTotal(bachelors.value)" /><label for="bachelors">&nbsp;Bachelor's Degree</label>
+			</div>
+
+			<div class="row">
+					<p class="pull-right">Total Points: {{combinedTotal}}</p>
+			</div>
+			<div class="row">
+				<button type="submit" class="btn btn-lg btn-success" ng-href="#/">Print <span class="glyphicon glyphicon-ok"></span></button>
+			</div>
+			</form>
+
 </div>
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>
