@@ -1,18 +1,17 @@
 <div class="jumbotron">
-    <h2>Rating Scale for Foundations</h2>
-	<h2>New Admissions</h2>
+    <h2>Rating Scale for Foundations<br/><small>New Admissions</small></h2>
 
 			<form class="form-horizontal" ng-controller="RatingController">
 	<div class="row">
-					<div class="form-group">
+					<div class="form-group1 col-sm-5">
 							<label for="first_name">First Name</label>
 							<input type="text" id="first_name" placeholder="First Name" class="form-control" />
 					</div>
-					<div class="form-group">
+					<div class="form-group1 col-sm-5">
 							<label for="last_name">Last Name</label>
 							<input type="text" id="last_name" placeholder="Last Name" class="form-control" />
 					</div>
-					<div class="form-group">
+					<div class="form-group1 col-sm-3">
 							<label for="studentid">Student ID</label>
 							<input type="text" id="studentid" placeholder="Student ID" class="form-control" />
 					</div>
@@ -42,12 +41,52 @@
 					Total Academic Points: {{academicTotal}}</p>
 			</div>
 			<div class="row">
-				<input type="checkbox" name="bachelors" id="bachelors" ng-model="bachelors.value" ng-change="computeTotal(bachelors.value)" /><label for="bachelors">&nbsp;Bachelor's Degree</label>
+				<p><input type="checkbox" name="bachelors" id="bachelors" ng-model="bachelors.value" ng-change="computeTotal(bachelors.value)" /><label for="bachelors">&nbsp;Bachelor's Degree</label></p>
+			</div>
+			<div class="row">
+				<h2>HESI Scores</h2>
+				<div class="col-md-3 col-md-offset-1" ng-repeat="hesi in hesis">
+					{{hesi.name}}
+					<input type="number" max="100" min="0" ng-if="hesi.is_date != true" ng-model="hesi.value" ng-change="computeHesi()" /><span ng-if="hesi.is_date != true">%</span>
+					<input type="date" ng-if="hesi.is_date == true" />
+				</div>
+			</div>
+			<div class="row">
+				<mark ng-if="showHesiWarning == true">Must pass all four components with a 75%</mark>
+				<p class="pull-right">HESI Points: {{hesiTotal}}</p>
 			</div>
 
 			<div class="row">
-					<p class="pull-right">Total Points: {{combinedTotal}}</p>
+				<h2>TEAS Scores</h2>
+				<div class="col-md-3 col-md-offset-1" ng-repeat="teas in teases">
+					{{teas.name}}
+					<input type="number" max="100" min="0" ng-if="teas.is_date != true" ng-model="teas.value" ng-change="computeTeas()" /><span ng-if="teas.is_date != true">%</span>
+					<input type="date" ng-if="teas.is_date == true" />
+				</div>
 			</div>
+			<div class="row">
+				<p class="pull-right">TEAS Points: {{teasTotal}}</p>
+			</div>
+			<div class="row">
+					<p class="pull-right"><strong>Total Points: {{combinedTotal}}</strong></p>
+			</div>
+
+			<div class="row"><div class="col-md-3">
+				<label for="gpa">GPA:</label>
+			</div>
+				<div class="col-md-5">
+				<input type="text" id="gpa" class="col-md-12" name="gpa" /></div>
+			</div>
+			<div class="clearfix">&nbsp;</div>
+			<div class="row">
+				<div class="col-md-3">
+					<label for="comments" style="text-align:left">Comments:</label>
+				</div>
+				<div class="col-md-9">
+					<input type="text" class="col-md-12" id="comments" name="comments" />
+				</div>
+			</div>
+
 			<div class="row">
 				<button type="submit" class="btn btn-lg btn-success" ng-href="#/">Print <span class="glyphicon glyphicon-ok"></span></button>
 			</div>
