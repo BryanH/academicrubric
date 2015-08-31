@@ -41,6 +41,9 @@
 					Total Academic Points: {{academicTotal}}</p>
 			</div>
 			<div class="row">
+				<p><input type="checkbox" name="humanities" id="humanities" /><label for="humanities">&nbsp;Humanities/Fine Arts (no points)</label></p>
+			</div>
+			<div class="row">
 				<p><input type="checkbox" name="bachelors" id="bachelors" ng-model="bachelors.value" ng-change="computeTotal(bachelors.value)" /><label for="bachelors">&nbsp;Bachelor's Degree</label></p>
 			</div>
 			<div class="row">
