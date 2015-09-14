@@ -17,28 +17,30 @@ angular.module('adrateApp')
   })
 .controller('RatingController', ['$scope', '$rootScope', function( $scope, $rootScope ) {
 					$scope.classes = [
-						{name: 'Engl 1301', value:0, has_points: true},
-						{name: 'Biol 2401', value:0, has_points: true},
-						{name: 'Psyc 2301', value:0, has_points: true},
-						{name: 'Knsg 1301', value:0, has_points: false},
-						{name: 'Biol 2402', value:0, has_points: true},
-						{name: 'Biol 2420', value:0, has_points: true},
-						{name: 'Psyc 2314', value:0, has_points: true}
+						{name: 'Engl 1301', value:0, has_points: true, required: true},
+						{name: 'Biol 2401', value:0, has_points: true, required: true},
+						{name: 'Psyc 2301', value:0, has_points: true, required: true},
+						{name: 'Biol 2402', value:0, has_points: true, required: false},
+						{name: 'Psyc 2314', value:0, has_points: true, required: false},
+						{name: 'Humanities/Fine Arts', value:0, has_points: true, required: false}
 					];
+
 					$scope.hesis = [
-						{name: "AP", value:0},
-						{name: "G", value:0},
-						{name: "M", value:0},
-						{name: "RC", value:0},
+						{name: "A&P", value:0},
+						{name: "Grammar", value:0},
+						{name: "Math", value:0},
+						{name: "Reading", value:0},
 						{name: "Date", value:0, is_date: true}
 					];
+
 					$scope.teases = [
-						{name: "R", value:0},
-						{name: "M", value:0},
-						{name: "S", value:0},
-						{name: "E", value:0},
+						{name: "Reading", value:0},
+						{name: "Math", value:0},
+						{name: "Science", value:0},
+						{name: "Eng. Lang.", value:0},
 						{name: "Date", value:0, is_date: true}
 					];
+
 					$scope.bachelors = { name: 'bachelors', value:false };
 
 					$scope.academicTotal = 0;
@@ -46,6 +48,8 @@ angular.module('adrateApp')
 					$scope.hesiTotal = 0;
 					$scope.combinedTotal = 0;
 					$scope.showHesiWarning = true;
+
+					$scope.ignoreTeas = false;
 
 					$rootScope.pageTitle = "Associate Degree Nursing";
 					//		$scope.points = { startingPoints: 0 };
@@ -101,12 +105,16 @@ angular.module('adrateApp')
 										}
 										$scope.teasTotal = total;
 										$scope.computeTotal();
+
 									}
 
 									$scope.computeTotal = function() {
 										var total = 0;
-										total += $scope.hesiTotal;
-										total += $scope.teasTotal;
+										if( $scope.ignoreTeas) {
+											total += $scope.hesiTotal;
+										} else {
+											total += $scope.teasTotal;
+										}
 										if( $scope.bachelors.value) {
 											total++;
 										}
@@ -153,13 +161,51 @@ angular.module('adrateApp')
 										}
 										return points;
 									}
-/*
-							$scope.class.points.total = function() {
-									var total = 0;
-									for (var i = 0, len = $scope.classes.length; i < len; i++) {
-											total = total + $scope.classes.value;
-									}
-									return total;
-									}
+
+									/* Called when HESI has been selected
 									*/
+									$scope.calcHesi = function() {
+										$scope.ignoreTeas = true;
+										console.log("use HESI");
+										$scope.computeTotal();
+									}
+
+									/* Called when TEAS has been selected
+									*/
+									$scope.calcTeas = function() {
+										$scope.ignoreTeas = false;
+										console.log("use TEAS");
+										$scope.computeTotal();
+									}
+
+									/* Calculate points based upon GPA
+									 @param gpa Float of gpa, to thousanths
+									 @returns point score
+									 */
+									function gpaPoints( gpa ) {
+										var points = 0;
+										if( gpa >= 3.800 && gpa <= 4.000 ) {
+											points = 5;
+										} else {
+											/* We don't need an upper-bound because that is
+											   covered by the previous 'if' statement */
+											if( gpa >= 3.600 ) {
+												points = 4;
+											} else {
+												if( gpa >= 3.400 ) {
+													points = 3;
+												} else {
+													if( gpa >= 3.200 ) {
+														points = 2;
+													} else {
+														if( gpa >= 3.000 ) {
+															points = 1;
+														}
+													}
+												}
+											}
+										}
+										return points;
+									}
+
 }]);
