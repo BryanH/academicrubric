@@ -116,3 +116,20 @@ body {
     border-bottom: 0;
   }
 }
+.test-field {
+    margin: 5px 0;
+}
+.test-field .test-input {
+   /*
+    margin: 0 5px;
+   */
+}
+.test-name {
+    text-align: right;
+}
+.tab-content {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-top-color: transparent;
+    border-radius: 4px;
+}

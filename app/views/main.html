@@ -23,7 +23,7 @@
                     </td>
                     <td>
                         <input type="radio" name="{{class.name}}" value="2" id="{{class.name}}2" ng-model="class.value" ng-change="computeAcademic(class.value)" />
-                        <label for="{{class.name}}2">&nbsp;C/CLEP</label>
+                        <label for="{{class.name}}2">&nbsp;C/CLEP/AP</label>
                     </td>
                     <td>
                         <input type="radio" name="{{class.name}}" value="0" id="{{class.name}}0" ng-model="class.value" ng-change="computeAcademic(class.value)" />
@@ -44,105 +44,77 @@
             </p>
         </div>
         <div class="row">
-    <h3>TEAS (V) or HESI Exam<br /><small>Must pass each of the 4 components at a proficiant level</small></h3>
-</div>
-<div class="row">
-    <!-- Hesi/Teas Tabs -->
-    <ul class="nav nav-tabs" id="tests" role="tablist">
-        <li role="presentation" class="active"><a ng-href="#teas" ng-init="calcTeas()" ng-click="calcTeas()" aria-controls="home" role="tab" data-toggle="tab">TEAS</a></li>
-        <li role="presentation"><a ng-href="#hesi" ng-click="calcHesi()" aria-controls="profile" role="tab" data-toggle="tab">HESI</a></li>
-    </ul>
-</div>
-<div class="row">
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="teas">
-            <div class="row">
-                <h2>TEAS Scores</h2>
-                <div class="col-md-5 test-field" ng-repeat="teas in teases">
-                    <div class="col-md-5 test-name">{{teas.name}}</div>
-                    <div class="col-md-5">
-                        <input type="number" class="test-input" max="100" min="0" ng-if="teas.is_date != true" ng-model="teas.value" ng-change="computeTeas()" /><span ng-if="teas.is_date != true">%</span>
-                        <input type="date" ng-if="teas.is_date == true" />
-                    </div>
-                </div>
-
-
-                <div class="col-md-11">
-                    <p class="pull-right">TEAS Points: {{teasTotal}}</p>
-                </div>
-            </div>
+            <h3>TEAS (V) or HESI Exam<br /><small>Must pass each of the 4 components at a proficiant level</small></h3>
         </div>
-        <div role="tabpanel" class="tab-pane" id="hesi">
-            <div class="row">
-                <h2>HESI Scores</h2>
-                <div class="col-md-5 test-field" ng-repeat="hesi in hesis">
-                    <div class="col-md-5 test-name">{{hesi.name}}</div>
-                    <div class="col-md-5">
-                        <input type="number" class="test-input" max="100" min="0" ng-if="hesi.is_date != true" ng-model="hesi.value" ng-change="computeHesi()" /><span ng-if="hesi.is_date != true">%</span>
-                        <input type="date" ng-if="hesi.is_date == true" />
-                    </div>
-                </div>
-
-
-                <div class="col-md-11">
-                    <div class="offset-md-1 col-md-5"><mark ng-if="showHesiWarning == true">Must pass all four components with a 75%</mark></div>
-                    <p class="pull-right">HESI Points: {{hesiTotal}}</p>
-                </div>
-            </div>
-        </div>
-</div>
-
-
         <div class="row">
-            <p class="pull-right"><strong>Total Points: {{combinedTotal}}</strong></p>
+            <!-- Hesi/Teas Tabs -->
+            <ul class="nav nav-tabs" id="tests" role="tablist">
+                <li role="presentation" class="active"><a ng-href="#teas" ng-init="calcTeas()" ng-click="calcTeas()" aria-controls="home" role="tab" data-toggle="tab">TEAS</a></li>
+                <li role="presentation"><a ng-href="#hesi" ng-click="calcHesi()" aria-controls="profile" role="tab" data-toggle="tab">HESI</a></li>
+            </ul>
         </div>
+        <div class="row">
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="teas">
+                    <div class="row">
+                        <h2>TEAS Scores</h2>
+                        <div class="col-md-5 test-field" ng-repeat="teas in teases">
+                            <div class="col-md-5 test-name">{{teas.name}}</div>
+                            <div class="col-md-5">
+                                <input type="number" class="test-input" max="100" min="0" ng-if="teas.is_date != true" ng-model="teas.value" ng-change="computeTeas()" /><span ng-if="teas.is_date != true">%</span>
+                                <input type="date" ng-if="teas.is_date == true" />
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-11">
+                            <div class="offset-md-1 col-md-6"><mark ng-if="showTeasWarning == true">Minimum scores of 64% are required on each of the 4 sections</mark></div>
+                            <p class="pull-right">TEAS Points: {{teasTotal}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="hesi">
+                    <div class="row">
+                        <h2>HESI Scores</h2>
+                        <div class="col-md-5 test-field" ng-repeat="hesi in hesis">
+                            <div class="col-md-5 test-name">{{hesi.name}}</div>
+                            <div class="col-md-5">
+                                <input type="number" class="test-input" max="100" min="0" ng-if="hesi.is_date != true" ng-model="hesi.value" ng-change="computeHesi()" /><span ng-if="hesi.is_date != true">%</span>
+                                <input type="date" ng-if="hesi.is_date == true" />
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-11">
+                            <div class="offset-md-1 col-md-6"><mark ng-if="showHesiWarning == true">Minimum scores of 75% are required on each of the 4 sections</mark></div>
+                            <p class="pull-right">HESI Points: {{hesiTotal}}</p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="clearfix">&nbsp;</div>
         <div class="row">
             <div class="col-md-3">
                 <label for="gpa">GPA:</label>
             </div>
             <div class="col-md-5">
-                <input type="text" id="gpa" class="col-md-8" name="gpa" />
+                <input type="number" min="0.000" max="4.000" id="gpa" class="col-md-8" name="gpa" ng-model="gpa.value" ng-change="computeTotal(gpa.value)" />
             </div>
         </div>
         <div class="clearfix">&nbsp;</div>
         <div class="row">
-            <div class="col-md-3">
-                <label for="comments" style="text-align:left">Comments:</label>
-            </div>
-            <div class="col-md-9">
-                <input type="text" class="col-md-12" id="comments" name="comments" />
-            </div>
-        </div>
-        <div class="row">
-            <!--
-				<button type="submit" class="btn btn-lg btn-success" ng-href="#/">Print <span class="glyphicon glyphicon-ok"></span></button>
-			-->
+            <p class="pull-right"><strong>Total Points: {{combinedTotal}}</strong></p>
         </div>
     </form>
 </div>
-<style type="text/css">
-.test-field {
-    margin: 5px 0;
-}
-.test-field .test-input {
-   /*
-    margin: 0 5px;
-   */
-}
-.test-name {
-    text-align: right;
-}
-.tab-content {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-top-color: transparent;
-    border-radius: 4px;
-}
-</style>
+
 <script type="text/javascript">
-    $('#tests a').click(function (e) {
-  e.preventDefault()
-  $(this).tab('show')
-})
+/* <![CDATA */
+    $('#tests a').click( function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
+/* ]]> */
 </script>
