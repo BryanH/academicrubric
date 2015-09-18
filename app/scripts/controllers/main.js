@@ -93,7 +93,7 @@ angular.module('adrateApp')
 		$scope.hesiTotal = total;
 		$scope.showHesiWarning = warning;
 		$scope.computeTotal();
-	}
+	};
 
 	// calculate teas
 	$scope.computeTeas = function() {
@@ -119,7 +119,7 @@ angular.module('adrateApp')
 		$scope.showTeasWarning = warning;
 		$scope.computeTotal();
 
-	}
+	};
 
 	$scope.computeTotal = function() {
 		var total = 0;
@@ -138,7 +138,7 @@ angular.module('adrateApp')
 
 		total += $scope.academicTotal;
 		$scope.combinedTotal = total;
-	}
+	};
 
 	/*
 	 Calculate points from HESI Scores
@@ -171,38 +171,9 @@ angular.module('adrateApp')
 				points = 2;
 			} else {
 				if( teasPercent >= 64 ) {
-					points = 1
+					points = 1;
 				} else {
 					// below 64 is zero points
-				}
-			}
-		}
-		return points;
-	}
-
-	/*
-		Calculate points based upon GPA
-		*/
-	function gpaPoints( gpa ) {
-		var points = 0;
-		if( gpa >= 3.800 && gpa <= 4.000 ) {
-			points = 5;
-		} else {
-			if( gpa >= 3.600 && gpa <= 3.799 ) {
-				points = 4;
-			} else {
-				if( gpa >= 3.400 && gpa <= 3.599 ) {
-					points = 3;
-				} else {
-					if( gpa >= 3.200 && gpa <= 3.399 ) {
-						points = 2;
-					} else {
-						if( gpa >= 3.000 && gpa <= 3.199 ) {
-							points = 1;
-						} else {
-							// No points for < 3.000
-						}
-					}
 				}
 			}
 		}
@@ -215,7 +186,7 @@ angular.module('adrateApp')
 		$scope.ignoreTeas = true;
 		console.log("use HESI");
 		$scope.computeTotal();
-	}
+	};
 
 	/* Called when TEAS has been selected
 	*/
@@ -223,7 +194,7 @@ angular.module('adrateApp')
 		$scope.ignoreTeas = false;
 		console.log("use TEAS");
 		$scope.computeTotal();
-	}
+	};
 
 	/* Calculate points based upon GPA
 	 @param gpa Float of gpa, to thousanths
@@ -247,6 +218,8 @@ angular.module('adrateApp')
 					} else {
 						if( gpa >= 3.000 ) {
 							points = 1;
+						} else {
+							// No points for < 3.000
 						}
 					}
 				}
