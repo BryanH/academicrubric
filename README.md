@@ -8,7 +8,12 @@ This app is designed to help an academic program candidate determine their likel
 To **build** and **test** the code, you will need
 
 * NPM (included with [Node](https://nodejs.org/en/)) and
-* [Grunt](http://gruntjs.com)
+* [Grunt](http://gruntjs.com) - note you need the command-line version
+
+**The first time** you will need to install the project dependencies.
+
+1. Switch to the project directory
+2. run `npm install` (*not with sudo*)
 
 To serve the code, you do not need anything except a working webserver.
 
