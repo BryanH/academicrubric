@@ -18,11 +18,11 @@ angular.module('adrateApp')
 .controller('RatingController', ['$scope', '$rootScope', function( $scope, $rootScope ) {
 	$scope.classes = [
 		{name: 'Engl 1301', value:0, has_points: true, required: true},
-		{name: 'Biol 2401', value:0, has_points: true, required: true},
+		{name: 'Biol 2401', value:0, has_points: true, required: true, req_recent: true},
 		{name: 'Biol 2420', value:0, has_points: true, required: true},
 		{name: 'Psyc 2301', value:0, has_points: true, required: true},
-		{name: 'Biol 2402', value:0, has_points: true, required: false},
-		{name: 'Psyc 2314', value:0, has_points: true, required: false},
+		{name: 'Biol 2402', value:0, has_points: true, required: false, req_recent: true},
+		{name: 'Psyc 2314', value:0, has_points: true, required: false, req_recent: true},
 		{name: 'Humanities/Fine Arts', value:0, has_points: true, required: false}
 	];
 
