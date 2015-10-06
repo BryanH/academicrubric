@@ -33,6 +33,7 @@
                     <td ng-if="class.has_points == false">&ndash;</td>
                 </tr>
             </table>
+            <p class="small">* Course <strong>must be</strong> successfully completed within 5 years of application.</p>
             <p class='pull-right'>
                 Total Academic Points: {{academicTotal}}</p>
         </div>
@@ -97,7 +98,7 @@
         <div class="clearfix">&nbsp;</div>
         <div class="row">
             <div class="col-md-3">
-                <label for="gpa">GPA:</label>
+                <label for="gpa">Cumulative GPA:</label>
             </div>
             <div class="col-md-5">
                 <input type="number" min="0.000" max="4.000" id="gpa" class="col-md-8" name="gpa" ng-model="gpa.value" ng-change="computeTotal(gpa.value)" />
@@ -118,3 +119,4 @@
     });
 /* ]]> */
 </script>
+
